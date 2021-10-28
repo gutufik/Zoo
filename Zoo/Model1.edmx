@@ -1,0 +1,535 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Zoo_Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Animal">
+          <Key>
+            <PropertyRef Name="AnimalID" />
+          </Key>
+          <Property Name="AnimalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Birthday" Type="date" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Clerk">
+          <Key>
+            <PropertyRef Name="ClerkID" />
+          </Key>
+          <Property Name="ClerkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClerkName" Type="varchar" MaxLength="50" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="birthday" Type="date" />
+        </EntityType>
+        <EntityType Name="Clerk_Animal">
+          <Key>
+            <PropertyRef Name="ClerkID" />
+            <PropertyRef Name="AnimalID" />
+          </Key>
+          <Property Name="ClerkID" Type="int" Nullable="false" />
+          <Property Name="AnimalID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClimatZone">
+          <Key>
+            <PropertyRef Name="ZoneID" />
+          </Key>
+          <Property Name="ZoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ZoneName" Type="varbinary" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Diet">
+          <Key>
+            <PropertyRef Name="DietID" />
+            <PropertyRef Name="AnimalID" />
+            <PropertyRef Name="FeedTypeID" />
+          </Key>
+          <Property Name="DietID" Type="int" Nullable="false" />
+          <Property Name="AnimalID" Type="int" Nullable="false" />
+          <Property Name="FeedTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FeedType">
+          <Key>
+            <PropertyRef Name="FeedTypeID" />
+          </Key>
+          <Property Name="FeedTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeedTypeName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="ProviderID" />
+          </Key>
+          <Property Name="ProviderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProviderName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Provider_Feed">
+          <Key>
+            <PropertyRef Name="ProviderID" />
+            <PropertyRef Name="FeedTypeID" />
+          </Key>
+          <Property Name="ProviderID" Type="int" Nullable="false" />
+          <Property Name="FeedTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Login" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Zone_Animal">
+          <Key>
+            <PropertyRef Name="ZoneID" />
+            <PropertyRef Name="AnimalID" />
+          </Key>
+          <Property Name="ZoneID" Type="int" Nullable="false" />
+          <Property Name="AnimalID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Cleck_Animal_Animal">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+          <End Role="Clerk_Animal" Type="Self.Clerk_Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="AnimalID" />
+            </Principal>
+            <Dependent Role="Clerk_Animal">
+              <PropertyRef Name="AnimalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cleck_Animal_Clerk">
+          <End Role="Clerk" Type="Self.Clerk" Multiplicity="1" />
+          <End Role="Clerk_Animal" Type="Self.Clerk_Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clerk">
+              <PropertyRef Name="ClerkID" />
+            </Principal>
+            <Dependent Role="Clerk_Animal">
+              <PropertyRef Name="ClerkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clerk_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Clerk" Type="Self.Clerk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Clerk">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diet_Animal">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+          <End Role="Diet" Type="Self.Diet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="AnimalID" />
+            </Principal>
+            <Dependent Role="Diet">
+              <PropertyRef Name="AnimalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diet_FeedType">
+          <End Role="FeedType" Type="Self.FeedType" Multiplicity="1" />
+          <End Role="Diet" Type="Self.Diet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FeedType">
+              <PropertyRef Name="FeedTypeID" />
+            </Principal>
+            <Dependent Role="Diet">
+              <PropertyRef Name="FeedTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provider_Feed_FeedType">
+          <End Role="FeedType" Type="Self.FeedType" Multiplicity="1" />
+          <End Role="Provider_Feed" Type="Self.Provider_Feed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FeedType">
+              <PropertyRef Name="FeedTypeID" />
+            </Principal>
+            <Dependent Role="Provider_Feed">
+              <PropertyRef Name="FeedTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provider_Feed_Provider">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+          <End Role="Provider_Feed" Type="Self.Provider_Feed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ProviderID" />
+            </Principal>
+            <Dependent Role="Provider_Feed">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zone_Animal_Animal">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+          <End Role="Zone_Animal" Type="Self.Zone_Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="AnimalID" />
+            </Principal>
+            <Dependent Role="Zone_Animal">
+              <PropertyRef Name="AnimalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zone_Animal_ClimatZone">
+          <End Role="ClimatZone" Type="Self.ClimatZone" Multiplicity="1" />
+          <End Role="Zone_Animal" Type="Self.Zone_Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClimatZone">
+              <PropertyRef Name="ZoneID" />
+            </Principal>
+            <Dependent Role="Zone_Animal">
+              <PropertyRef Name="ZoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Zoo_ModelContainer">
+          <EntitySet Name="Animal" EntityType="Self.Animal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clerk" EntityType="Self.Clerk" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clerk_Animal" EntityType="Self.Clerk_Animal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClimatZone" EntityType="Self.ClimatZone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diet" EntityType="Self.Diet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeedType" EntityType="Self.FeedType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provider_Feed" EntityType="Self.Provider_Feed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zone_Animal" EntityType="Self.Zone_Animal" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cleck_Animal_Animal" Association="Self.FK_Cleck_Animal_Animal">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="Clerk_Animal" EntitySet="Clerk_Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cleck_Animal_Clerk" Association="Self.FK_Cleck_Animal_Clerk">
+            <End Role="Clerk" EntitySet="Clerk" />
+            <End Role="Clerk_Animal" EntitySet="Clerk_Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clerk_Category" Association="Self.FK_Clerk_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Clerk" EntitySet="Clerk" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diet_Animal" Association="Self.FK_Diet_Animal">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="Diet" EntitySet="Diet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diet_FeedType" Association="Self.FK_Diet_FeedType">
+            <End Role="FeedType" EntitySet="FeedType" />
+            <End Role="Diet" EntitySet="Diet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provider_Feed_FeedType" Association="Self.FK_Provider_Feed_FeedType">
+            <End Role="FeedType" EntitySet="FeedType" />
+            <End Role="Provider_Feed" EntitySet="Provider_Feed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provider_Feed_Provider" Association="Self.FK_Provider_Feed_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Provider_Feed" EntitySet="Provider_Feed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zone_Animal_Animal" Association="Self.FK_Zone_Animal_Animal">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="Zone_Animal" EntitySet="Zone_Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zone_Animal_ClimatZone" Association="Self.FK_Zone_Animal_ClimatZone">
+            <End Role="ClimatZone" EntitySet="ClimatZone" />
+            <End Role="Zone_Animal" EntitySet="Zone_Animal" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Zoo_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Animal">
+          <Key>
+            <PropertyRef Name="AnimalID" />
+          </Key>
+          <Property Name="AnimalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Diet" Relationship="Self.FK_Diet_Animal" FromRole="Animal" ToRole="Diet" />
+          <NavigationProperty Name="Clerk" Relationship="Self.Clerk_Animal" FromRole="Animal" ToRole="Clerk" />
+          <NavigationProperty Name="ClimatZone" Relationship="Self.Zone_Animal" FromRole="Animal" ToRole="ClimatZone" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Clerk" Relationship="Self.FK_Clerk_Category" FromRole="Category" ToRole="Clerk" />
+        </EntityType>
+        <EntityType Name="Clerk">
+          <Key>
+            <PropertyRef Name="ClerkID" />
+          </Key>
+          <Property Name="ClerkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClerkName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="birthday" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Clerk_Category" FromRole="Clerk" ToRole="Category" />
+          <NavigationProperty Name="Animal" Relationship="Self.Clerk_Animal" FromRole="Clerk" ToRole="Animal" />
+        </EntityType>
+        <EntityType Name="ClimatZone">
+          <Key>
+            <PropertyRef Name="ZoneID" />
+          </Key>
+          <Property Name="ZoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ZoneName" Type="Binary" MaxLength="50" FixedLength="false" />
+          <NavigationProperty Name="Animal" Relationship="Self.Zone_Animal" FromRole="ClimatZone" ToRole="Animal" />
+        </EntityType>
+        <EntityType Name="Diet">
+          <Key>
+            <PropertyRef Name="DietID" />
+            <PropertyRef Name="AnimalID" />
+            <PropertyRef Name="FeedTypeID" />
+          </Key>
+          <Property Name="DietID" Type="Int32" Nullable="false" />
+          <Property Name="AnimalID" Type="Int32" Nullable="false" />
+          <Property Name="FeedTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Animal" Relationship="Self.FK_Diet_Animal" FromRole="Diet" ToRole="Animal" />
+          <NavigationProperty Name="FeedType" Relationship="Self.FK_Diet_FeedType" FromRole="Diet" ToRole="FeedType" />
+        </EntityType>
+        <EntityType Name="FeedType">
+          <Key>
+            <PropertyRef Name="FeedTypeID" />
+          </Key>
+          <Property Name="FeedTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FeedTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Diet" Relationship="Self.FK_Diet_FeedType" FromRole="FeedType" ToRole="Diet" />
+          <NavigationProperty Name="Provider" Relationship="Self.Provider_Feed" FromRole="FeedType" ToRole="Provider" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="ProviderID" />
+          </Key>
+          <Property Name="ProviderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProviderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FeedType" Relationship="Self.Provider_Feed" FromRole="Provider" ToRole="FeedType" />
+        </EntityType>
+        <Association Name="FK_Diet_Animal">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+          <End Role="Diet" Type="Self.Diet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="AnimalID" />
+            </Principal>
+            <Dependent Role="Diet">
+              <PropertyRef Name="AnimalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clerk_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Clerk" Type="Self.Clerk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Clerk">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diet_FeedType">
+          <End Role="FeedType" Type="Self.FeedType" Multiplicity="1" />
+          <End Role="Diet" Type="Self.Diet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FeedType">
+              <PropertyRef Name="FeedTypeID" />
+            </Principal>
+            <Dependent Role="Diet">
+              <PropertyRef Name="FeedTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Clerk_Animal">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <End Role="Clerk" Type="Self.Clerk" Multiplicity="*" />
+        </Association>
+        <Association Name="Provider_Feed">
+          <End Role="FeedType" Type="Self.FeedType" Multiplicity="*" />
+          <End Role="Provider" Type="Self.Provider" Multiplicity="*" />
+        </Association>
+        <Association Name="Zone_Animal">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <End Role="ClimatZone" Type="Self.ClimatZone" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Zoo_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Animal" EntityType="Self.Animal" />
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Clerk" EntityType="Self.Clerk" />
+          <EntitySet Name="ClimatZone" EntityType="Self.ClimatZone" />
+          <EntitySet Name="Diet" EntityType="Self.Diet" />
+          <EntitySet Name="FeedType" EntityType="Self.FeedType" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" />
+          <AssociationSet Name="FK_Diet_Animal" Association="Self.FK_Diet_Animal">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="Diet" EntitySet="Diet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clerk_Category" Association="Self.FK_Clerk_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Clerk" EntitySet="Clerk" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diet_FeedType" Association="Self.FK_Diet_FeedType">
+            <End Role="FeedType" EntitySet="FeedType" />
+            <End Role="Diet" EntitySet="Diet" />
+          </AssociationSet>
+          <AssociationSet Name="Clerk_Animal" Association="Self.Clerk_Animal">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="Clerk" EntitySet="Clerk" />
+          </AssociationSet>
+          <AssociationSet Name="Provider_Feed" Association="Self.Provider_Feed">
+            <End Role="FeedType" EntitySet="FeedType" />
+            <End Role="Provider" EntitySet="Provider" />
+          </AssociationSet>
+          <AssociationSet Name="Zone_Animal" Association="Self.Zone_Animal">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="ClimatZone" EntitySet="ClimatZone" />
+          </AssociationSet>
+          <EntitySet Name="User" EntityType="Zoo_Model.User" />
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Zoo_ModelContainer" CdmEntityContainer="Zoo_Entities">
+          <EntitySetMapping Name="Animal">
+            <EntityTypeMapping TypeName="Zoo_Model.Animal">
+              <MappingFragment StoreEntitySet="Animal">
+                <ScalarProperty Name="AnimalID" ColumnName="AnimalID" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="Zoo_Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clerk">
+            <EntityTypeMapping TypeName="Zoo_Model.Clerk">
+              <MappingFragment StoreEntitySet="Clerk">
+                <ScalarProperty Name="ClerkID" ColumnName="ClerkID" />
+                <ScalarProperty Name="ClerkName" ColumnName="ClerkName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClimatZone">
+            <EntityTypeMapping TypeName="Zoo_Model.ClimatZone">
+              <MappingFragment StoreEntitySet="ClimatZone">
+                <ScalarProperty Name="ZoneID" ColumnName="ZoneID" />
+                <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diet">
+            <EntityTypeMapping TypeName="Zoo_Model.Diet">
+              <MappingFragment StoreEntitySet="Diet">
+                <ScalarProperty Name="DietID" ColumnName="DietID" />
+                <ScalarProperty Name="AnimalID" ColumnName="AnimalID" />
+                <ScalarProperty Name="FeedTypeID" ColumnName="FeedTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeedType">
+            <EntityTypeMapping TypeName="Zoo_Model.FeedType">
+              <MappingFragment StoreEntitySet="FeedType">
+                <ScalarProperty Name="FeedTypeID" ColumnName="FeedTypeID" />
+                <ScalarProperty Name="FeedTypeName" ColumnName="FeedTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provider">
+            <EntityTypeMapping TypeName="Zoo_Model.Provider">
+              <MappingFragment StoreEntitySet="Provider">
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Clerk_Animal" TypeName="Zoo_Model.Clerk_Animal" StoreEntitySet="Clerk_Animal">
+            <EndProperty Name="Animal">
+              <ScalarProperty Name="AnimalID" ColumnName="AnimalID" />
+            </EndProperty>
+            <EndProperty Name="Clerk">
+              <ScalarProperty Name="ClerkID" ColumnName="ClerkID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Provider_Feed" TypeName="Zoo_Model.Provider_Feed" StoreEntitySet="Provider_Feed">
+            <EndProperty Name="FeedType">
+              <ScalarProperty Name="FeedTypeID" ColumnName="FeedTypeID" />
+            </EndProperty>
+            <EndProperty Name="Provider">
+              <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Zone_Animal" TypeName="Zoo_Model.Zone_Animal" StoreEntitySet="Zone_Animal">
+            <EndProperty Name="Animal">
+              <ScalarProperty Name="AnimalID" ColumnName="AnimalID" />
+            </EndProperty>
+            <EndProperty Name="ClimatZone">
+              <ScalarProperty Name="ZoneID" ColumnName="ZoneID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Zoo_Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
