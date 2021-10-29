@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,28 +19,40 @@ namespace Zoo
     /// <summary>
     /// Логика взаимодействия для PageReg.xaml
     /// </summary>
+    
     public partial class PageReg : Page
     {
+        public static ObservableCollection<Category> categories { get; set; }
+        int i { get; set; }
         public PageReg()
         {
             InitializeComponent();
+            categories = new ObservableCollection<Category>(DBConnect.connection.Category.ToList());
+            this.DataContext = this;
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Page2());
+            NavigationService.Navigate(new PageAuth());
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var u = new User();
-            u.Name = txtNAme.Text;
+            var u = new Clerk();
+            u.ClerkName = txtName.Text;
             u.Login = txtLogin.Text;
-            u.password = txtPassword.Password;
-            DBConnect.connection.User.Add(u);
+            u.Password = txtPassword.Password;
+            u.CategoryID = i;
+            DBConnect.connection.Clerk.Add(u);
             DBConnect.connection.SaveChanges();
             MessageBox.Show("All ok");
             NavigationService.GoBack();
+        }
+
+        private void cmbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var a = (sender as ComboBox).SelectedItem as Category;
+            i = a.CategoryId;
         }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1ecaadb491c443d8b500a75f4c2d56f5" Name="Diagram1" ZoomLevel="61">
+      <Diagram DiagramId="1ecaadb491c443d8b500a75f4c2d56f5" Name="Diagram1" ZoomLevel="80">
         <EntityTypeShape EntityType="Zoo_Model.Animal" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Zoo_Model.Category" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="Zoo_Model.Clerk" Width="1.5" PointX="4" PointY="3.75" IsExpanded="true" />
@@ -18,7 +18,6 @@
         <AssociationConnector Association="Zoo_Model.Clerk_Animal" ManuallyRouted="false" />
         <AssociationConnector Association="Zoo_Model.Provider_Feed" ManuallyRouted="false" />
         <AssociationConnector Association="Zoo_Model.Zone_Animal" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Zoo_Model.User" Width="1.5" PointX="7.125" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

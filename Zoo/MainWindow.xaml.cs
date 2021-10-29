@@ -23,7 +23,7 @@ namespace Zoo
         public MainWindow()
         {
             InitializeComponent();
-            Frame_auth.NavigationService.Navigate(new Page2());
+            Frame_auth.NavigationService.Navigate(new PageAuth());
 
         }
     }

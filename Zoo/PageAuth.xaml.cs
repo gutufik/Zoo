@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,24 +17,22 @@ using System.Windows.Shapes;
 namespace Zoo
 {
     /// <summary>
-    /// Логика взаимодействия для Page2.xaml
+    /// Логика взаимодействия для PageAuth.xaml
     /// </summary>
-    
-    public partial class Page2 : Page
+    public partial class PageAuth : Page
     {
-        public static ObservableCollection<User> users { get; set; }
-        public Page2()
+        public PageAuth()
         {
             InitializeComponent();
         }
-
+        public static ObservableCollection<Clerk> users { get; set; }
         private void loginClick(object sender, RoutedEventArgs e)
         {
-            users = new ObservableCollection<User>(DBConnect.connection.User.ToList());
-            var z = users.Where(a => a.Login == txtLogin.Text && a.password == txtPassword.Password).FirstOrDefault();
+            users = new ObservableCollection<Clerk>(DBConnect.connection.Clerk.ToList());
+            var z = users.Where(a => a.Login == txtLogin.Text && a.Password == txtPassword.Password).FirstOrDefault();
             if (z != null)
             {
-                MessageBox.Show(z.Name);
+                MessageBox.Show(z.ClerkName);
             }
             else
             {

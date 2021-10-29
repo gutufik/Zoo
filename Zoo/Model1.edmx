@@ -26,7 +26,8 @@
           <Property Name="ClerkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClerkName" Type="varchar" MaxLength="50" />
           <Property Name="CategoryID" Type="int" />
-          <Property Name="birthday" Type="date" />
+          <Property Name="Login" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Clerk_Animal">
           <Key>
@@ -74,15 +75,6 @@
           </Key>
           <Property Name="ProviderID" Type="int" Nullable="false" />
           <Property Name="FeedTypeID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Login" Type="varchar" MaxLength="50" />
-          <Property Name="password" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Zone_Animal">
           <Key>
@@ -210,7 +202,6 @@
           <EntitySet Name="FeedType" EntityType="Self.FeedType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provider_Feed" EntityType="Self.Provider_Feed" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Zone_Animal" EntityType="Self.Zone_Animal" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cleck_Animal_Animal" Association="Self.FK_Cleck_Animal_Animal">
             <End Role="Animal" EntitySet="Animal" />
@@ -278,9 +269,10 @@
           <Property Name="ClerkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClerkName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CategoryID" Type="Int32" />
-          <Property Name="birthday" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Clerk_Category" FromRole="Clerk" ToRole="Category" />
           <NavigationProperty Name="Animal" Relationship="Self.Clerk_Animal" FromRole="Clerk" ToRole="Animal" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ClimatZone">
           <Key>
@@ -399,17 +391,7 @@
             <End Role="Animal" EntitySet="Animal" />
             <End Role="ClimatZone" EntitySet="ClimatZone" />
           </AssociationSet>
-          <EntitySet Name="User" EntityType="Zoo_Model.User" />
         </EntityContainer>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -435,10 +417,11 @@
           <EntitySetMapping Name="Clerk">
             <EntityTypeMapping TypeName="Zoo_Model.Clerk">
               <MappingFragment StoreEntitySet="Clerk">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="ClerkID" ColumnName="ClerkID" />
                 <ScalarProperty Name="ClerkName" ColumnName="ClerkName" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="birthday" ColumnName="birthday" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -499,16 +482,6 @@
               <ScalarProperty Name="ZoneID" ColumnName="ZoneID" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="Zoo_Model.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

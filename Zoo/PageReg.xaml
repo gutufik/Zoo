@@ -21,19 +21,31 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Registration" TextAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="36" Margin="15"/>
-        <TextBlock Text="name"  TextAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"  FontSize="36"/>
-        <TextBlock Text="login"  TextAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"  FontSize="36"/>
-        <TextBlock Text="password" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" FontSize="36"/>
+        <TextBlock Text="Регистрация" TextAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="36" Margin="15"/>
+        <TextBlock Text="Имя"  TextAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"  FontSize="25"/>
+        <TextBlock Text="Логин"  TextAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"  FontSize="25"/>
+        <TextBlock Text="Пароль" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" FontSize="25"/>
+        <TextBlock Text="Должность" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" FontSize="25"/>
 
-        <TextBox x:Name="txtNAme" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" FontSize="30" Margin="15"/>
-        <TextBox x:Name="txtLogin" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" FontSize="30" Margin="15"/>
-        <PasswordBox x:Name="txtPassword" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" FontSize="30" Margin="15"/>
-        <StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-            <Button Content="Back" FontSize="30" Margin="10"  Padding="10" Click="BackClick"/>
-            <Button Content="Register" FontSize="30" Margin="10"  Padding="10" Click="Button_Click" />
+        <TextBox x:Name="txtName" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" FontSize="25" Margin="15"/>
+        <TextBox x:Name="txtLogin" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" FontSize="25" Margin="15"/>
+        <PasswordBox x:Name="txtPassword" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" FontSize="25" Margin="15"/>
+        <ComboBox Height="40" Width="230" Grid.Row="4" Grid.Column="1" FontSize="25" VerticalAlignment="Center" x:Name="cmbCategory"  ItemsSource="{Binding categories}"  SelectionChanged="cmbCategory_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding CategoryName}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <StackPanel Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <Button Content="Назад" FontSize="20" Margin="10"  Padding="10" Click="BackClick"/>
+            <Button Content="Зарегистрироваться" FontSize="20" Margin="10"  Padding="10" Click="Button_Click" />
         </StackPanel>
 
     </Grid>

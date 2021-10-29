@@ -32,6 +32,5 @@ namespace Zoo
         public virtual DbSet<Diet> Diet { get; set; }
         public virtual DbSet<FeedType> FeedType { get; set; }
         public virtual DbSet<Provider> Provider { get; set; }
-        public virtual DbSet<User> User { get; set; }
     }
 }
