@@ -23,13 +23,13 @@
         </Grid.RowDefinitions>
 
         <TextBlock Text="Авторизация" TextAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="36" Margin="15"/>
-        <TextBlock Text="Логин"  TextAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"  FontSize="36"/>
-        <TextBlock Text="Пароль" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" FontSize="36"/>
-        <TextBox x:Name="txtLogin" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" FontSize="30" Margin="15"/>
-        <PasswordBox x:Name="txtPassword" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" FontSize="30" Margin="15"/>
+        <TextBlock Text="Логин"  TextAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"  FontSize="25"/>
+        <TextBlock Text="Пароль" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" FontSize="25"/>
+        <TextBox x:Name="txtLogin" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" FontSize="25" Margin="15"/>
+        <PasswordBox x:Name="txtPassword" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" FontSize="25" Margin="15"/>
         <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-            <Button Content="Регистрация" FontSize="30" Margin="10" Click="registerClick"/>
-            <Button Content="Войти" FontSize="30" Margin="10" Click="loginClick"/>
+            <Button Content="Регистрация" FontSize="20" Padding="10" Margin="10" Click="registerClick"/>
+            <Button Content="Войти" FontSize="20" Padding="10" Margin="10" Click="loginClick"/>
         </StackPanel>
 
 

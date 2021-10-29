@@ -28,9 +28,9 @@ namespace Zoo
         public virtual DbSet<Animal> Animal { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Clerk> Clerk { get; set; }
-        public virtual DbSet<ClimatZone> ClimatZone { get; set; }
         public virtual DbSet<Diet> Diet { get; set; }
         public virtual DbSet<FeedType> FeedType { get; set; }
         public virtual DbSet<Provider> Provider { get; set; }
+        public virtual DbSet<ClimatZone> ClimatZone { get; set; }
     }
 }

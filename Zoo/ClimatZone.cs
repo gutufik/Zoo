@@ -21,7 +21,7 @@ namespace Zoo
         }
     
         public int ZoneID { get; set; }
-        public byte[] ZoneName { get; set; }
+        public string ZoneName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Animal> Animal { get; set; }

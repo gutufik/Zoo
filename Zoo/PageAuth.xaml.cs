@@ -32,7 +32,9 @@ namespace Zoo
             var z = users.Where(a => a.Login == txtLogin.Text && a.Password == txtPassword.Password).FirstOrDefault();
             if (z != null)
             {
-                MessageBox.Show(z.ClerkName);
+                HomeWindow homeWindow = new HomeWindow();
+                homeWindow.Show();
+                Application.Current.MainWindow.Close();
             }
             else
             {

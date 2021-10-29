@@ -42,7 +42,7 @@
             <PropertyRef Name="ZoneID" />
           </Key>
           <Property Name="ZoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ZoneName" Type="varbinary" MaxLength="50" />
+          <Property Name="ZoneName" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Diet">
           <Key>
@@ -252,7 +252,7 @@
           <Property Name="Birthday" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Diet" Relationship="Self.FK_Diet_Animal" FromRole="Animal" ToRole="Diet" />
           <NavigationProperty Name="Clerk" Relationship="Self.Clerk_Animal" FromRole="Animal" ToRole="Clerk" />
-          <NavigationProperty Name="ClimatZone" Relationship="Self.Zone_Animal" FromRole="Animal" ToRole="ClimatZone" />
+          <NavigationProperty Name="ClimatZone" Relationship="Zoo_Model.Zone_Animal" FromRole="Animal" ToRole="ClimatZone" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -273,14 +273,6 @@
           <NavigationProperty Name="Animal" Relationship="Self.Clerk_Animal" FromRole="Clerk" ToRole="Animal" />
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="ClimatZone">
-          <Key>
-            <PropertyRef Name="ZoneID" />
-          </Key>
-          <Property Name="ZoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ZoneName" Type="Binary" MaxLength="50" FixedLength="false" />
-          <NavigationProperty Name="Animal" Relationship="Self.Zone_Animal" FromRole="ClimatZone" ToRole="Animal" />
         </EntityType>
         <EntityType Name="Diet">
           <Key>
@@ -355,15 +347,10 @@
           <End Role="FeedType" Type="Self.FeedType" Multiplicity="*" />
           <End Role="Provider" Type="Self.Provider" Multiplicity="*" />
         </Association>
-        <Association Name="Zone_Animal">
-          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
-          <End Role="ClimatZone" Type="Self.ClimatZone" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="Zoo_Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Animal" EntityType="Self.Animal" />
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="Clerk" EntityType="Self.Clerk" />
-          <EntitySet Name="ClimatZone" EntityType="Self.ClimatZone" />
           <EntitySet Name="Diet" EntityType="Self.Diet" />
           <EntitySet Name="FeedType" EntityType="Self.FeedType" />
           <EntitySet Name="Provider" EntityType="Self.Provider" />
@@ -387,11 +374,24 @@
             <End Role="FeedType" EntitySet="FeedType" />
             <End Role="Provider" EntitySet="Provider" />
           </AssociationSet>
-          <AssociationSet Name="Zone_Animal" Association="Self.Zone_Animal">
+          <EntitySet Name="ClimatZone" EntityType="Zoo_Model.ClimatZone" />
+          <AssociationSet Name="Zone_Animal" Association="Zoo_Model.Zone_Animal">
             <End Role="Animal" EntitySet="Animal" />
             <End Role="ClimatZone" EntitySet="ClimatZone" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ClimatZone">
+          <Key>
+            <PropertyRef Name="ZoneID" />
+          </Key>
+          <Property Name="ZoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ZoneName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Animal" Relationship="Zoo_Model.Zone_Animal" FromRole="ClimatZone" ToRole="Animal" />
+        </EntityType>
+        <Association Name="Zone_Animal">
+          <End Type="Zoo_Model.Animal" Role="Animal" Multiplicity="*" />
+          <End Type="Zoo_Model.ClimatZone" Role="ClimatZone" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -422,14 +422,6 @@
                 <ScalarProperty Name="ClerkID" ColumnName="ClerkID" />
                 <ScalarProperty Name="ClerkName" ColumnName="ClerkName" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ClimatZone">
-            <EntityTypeMapping TypeName="Zoo_Model.ClimatZone">
-              <MappingFragment StoreEntitySet="ClimatZone">
-                <ScalarProperty Name="ZoneID" ColumnName="ZoneID" />
-                <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -474,12 +466,20 @@
               <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ClimatZone">
+            <EntityTypeMapping TypeName="Zoo_Model.ClimatZone">
+              <MappingFragment StoreEntitySet="ClimatZone">
+                <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
+                <ScalarProperty Name="ZoneID" ColumnName="ZoneID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="Zone_Animal" TypeName="Zoo_Model.Zone_Animal" StoreEntitySet="Zone_Animal">
-            <EndProperty Name="Animal">
-              <ScalarProperty Name="AnimalID" ColumnName="AnimalID" />
-            </EndProperty>
             <EndProperty Name="ClimatZone">
               <ScalarProperty Name="ZoneID" ColumnName="ZoneID" />
+            </EndProperty>
+            <EndProperty Name="Animal">
+              <ScalarProperty Name="AnimalID" ColumnName="AnimalID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
