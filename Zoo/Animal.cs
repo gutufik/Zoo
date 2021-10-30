@@ -23,7 +23,7 @@ namespace Zoo
         }
     
         public int AnimalID { get; set; }
-        public Nullable<System.DateTime> Birthday { get; set; }
+        public string AnimalName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Diet> Diet { get; set; }

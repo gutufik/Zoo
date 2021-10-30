@@ -20,12 +20,14 @@ namespace Zoo
     /// </summary>
     public partial class HomeWindow : Window
     {
-        public static ObservableCollection<ClimatZone> climatZones { get; set; }
+        
         public HomeWindow()
         {
             InitializeComponent();
-            climatZones = new ObservableCollection<ClimatZone>(DBConnect.connection.ClimatZone.ToList());
-            this.DataContext = this;
+            
+            Frame_full.NavigationService.Navigate(new PageZoneSelect());
         }
+
+        
     }
 }

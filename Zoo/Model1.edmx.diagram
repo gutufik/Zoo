@@ -5,18 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1ecaadb491c443d8b500a75f4c2d56f5" Name="Diagram1" ZoomLevel="80">
-        <EntityTypeShape EntityType="Zoo_Model.Animal" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Zoo_Model.Category" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Zoo_Model.Animal" Width="1.5" PointX="0.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Zoo_Model.Category" Width="1.5" PointX="1.875" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Zoo_Model.Clerk" Width="1.5" PointX="4" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Zoo_Model.Diet" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Zoo_Model.FeedType" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Zoo_Model.Diet" Width="1.5" PointX="3.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Zoo_Model.FeedType" Width="1.5" PointX="0.625" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Zoo_Model.Provider" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
         <AssociationConnector Association="Zoo_Model.FK_Diet_Animal" ManuallyRouted="false" />
         <AssociationConnector Association="Zoo_Model.FK_Clerk_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Zoo_Model.FK_Diet_FeedType" ManuallyRouted="false" />
         <AssociationConnector Association="Zoo_Model.Clerk_Animal" ManuallyRouted="false" />
         <AssociationConnector Association="Zoo_Model.Provider_Feed" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Zoo_Model.ClimatZone" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="Zoo_Model.ClimatZone" Width="1.5" PointX="7" PointY="7.125" />
         <AssociationConnector Association="Zoo_Model.Zone_Animal" />
       </Diagram>
     </edmx:Diagrams>

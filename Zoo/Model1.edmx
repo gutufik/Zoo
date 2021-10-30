@@ -10,7 +10,7 @@
             <PropertyRef Name="AnimalID" />
           </Key>
           <Property Name="AnimalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Birthday" Type="date" />
+          <Property Name="AnimalName" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -249,10 +249,10 @@
             <PropertyRef Name="AnimalID" />
           </Key>
           <Property Name="AnimalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Birthday" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Diet" Relationship="Self.FK_Diet_Animal" FromRole="Animal" ToRole="Diet" />
           <NavigationProperty Name="Clerk" Relationship="Self.Clerk_Animal" FromRole="Animal" ToRole="Clerk" />
           <NavigationProperty Name="ClimatZone" Relationship="Zoo_Model.Zone_Animal" FromRole="Animal" ToRole="ClimatZone" />
+          <Property Name="AnimalName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -401,8 +401,8 @@
           <EntitySetMapping Name="Animal">
             <EntityTypeMapping TypeName="Zoo_Model.Animal">
               <MappingFragment StoreEntitySet="Animal">
+                <ScalarProperty Name="AnimalName" ColumnName="AnimalName" />
                 <ScalarProperty Name="AnimalID" ColumnName="AnimalID" />
-                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
