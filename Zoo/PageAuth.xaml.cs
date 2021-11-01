@@ -25,10 +25,10 @@ namespace Zoo
         {
             InitializeComponent();
         }
-        public static ObservableCollection<Clerk> users { get; set; }
+        public static ObservableCollection<User> users { get; set; }
         private void loginClick(object sender, RoutedEventArgs e)
         {
-            users = new ObservableCollection<Clerk>(DBConnect.connection.Clerk.ToList());
+            users = new ObservableCollection<User>(DBConnect.connection.User.ToList());
             var z = users.Where(a => a.Login == txtLogin.Text && a.Password == txtPassword.Password).FirstOrDefault();
             if (z != null)
             {

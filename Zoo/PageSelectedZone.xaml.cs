@@ -34,7 +34,6 @@ namespace Zoo
 
         public PageSelectedZone(ClimatZone zone)
         {
-            //сделать 
             
             InitializeComponent();
             
@@ -50,7 +49,8 @@ namespace Zoo
                               {
                                   AnimalName = a.AnimalName,
                                   ZoneID = z.ZoneID,
-                                  ZoneName = zone.ZoneName
+                                  ZoneName = zone.ZoneName,
+                                  AnimalImage = a.AnimalImage
                               };
 
             tb_ZoneName.Text = zone.ZoneName;
@@ -67,5 +67,6 @@ namespace Zoo
         public string AnimalName { get; set; }
 
         public string ZoneName { get; set; }
+        public string AnimalImage { get; set; }
     }
 }

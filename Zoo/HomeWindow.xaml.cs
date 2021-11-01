@@ -21,13 +21,19 @@ namespace Zoo
     public partial class HomeWindow : Window
     {
         
-        public HomeWindow()
+        public HomeWindow(User user)
         {
             InitializeComponent();
             
+            Frame_full.NavigationService.Navigate(new PageZoneSelect(user));
+        }
+        public HomeWindow()
+        {
+            InitializeComponent();
+
             Frame_full.NavigationService.Navigate(new PageZoneSelect());
         }
-
+        
         
     }
 }

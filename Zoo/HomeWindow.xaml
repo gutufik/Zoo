@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zoo"
         mc:Ignorable="d"
-        Title="HomeWindow" Height="550" Width="800">
+        Title="HomeWindow" Height="600" Width="760">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="4*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Frame x:Name="Frame_full"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2" ></Frame>

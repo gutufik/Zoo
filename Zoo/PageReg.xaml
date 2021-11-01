@@ -44,8 +44,8 @@
         </ComboBox>
 
         <StackPanel Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-            <Button Content="Назад" FontSize="20" Margin="10"  Padding="10" Click="BackClick"/>
-            <Button Content="Зарегистрироваться" FontSize="20" Margin="10"  Padding="10" Click="Button_Click" />
+            <Button Content="Назад" FontSize="18" Margin="10"  Padding="10" Click="BackClick"/>
+            <Button Content="Зарегистрироваться" FontSize="18" Margin="10"  Padding="10" Click="Button_Click" />
         </StackPanel>
 
     </Grid>

@@ -33,20 +33,28 @@ namespace Zoo
 
         private void BackClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new PageAuth());
+            NavigationService.GoBack();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var u = new Clerk();
-            u.ClerkName = txtName.Text;
-            u.Login = txtLogin.Text;
-            u.Password = txtPassword.Password;
-            u.CategoryID = i;
-            DBConnect.connection.Clerk.Add(u);
-            DBConnect.connection.SaveChanges();
-            MessageBox.Show("All ok");
-            NavigationService.GoBack();
+            var u = new User();
+            if (i != 0)
+            {
+                u.UserName = txtName.Text;
+                u.Login = txtLogin.Text;
+                u.Password = txtPassword.Password;
+                u.CategoryID = i;
+                DBConnect.connection.User.Add(u);
+                DBConnect.connection.SaveChanges();
+                MessageBox.Show("All ok");
+                NavigationService.GoBack();
+            }
+            else 
+            {
+                MessageBox.Show("Invalid User", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
         private void cmbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -4,26 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="338f6f02143f4e2ba586113a4ef7a7b0" Name="Diagram1" ZoomLevel="108">
-        <EntityTypeShape EntityType="zooModel.Animal" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="zooModel.Category" Width="1.5" PointX="1.5" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="zooModel.Clerk" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="zooModel.Clerk_Animal" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="zooModel.Diet" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="zooModel.FeedType" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="zooModel.Provider" Width="1.5" PointX="0.75" PointY="18.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="zooModel.Provider_Feed" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="zooModel.Zone_Animal" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
-        <AssociationConnector Association="zooModel.FK_Cleck_Animal_Animal" ManuallyRouted="false" />
-        <AssociationConnector Association="zooModel.FK_Diet_Animal" ManuallyRouted="false" />
-        <AssociationConnector Association="zooModel.FK_Zone_Animal_Animal" ManuallyRouted="false" />
-        <AssociationConnector Association="zooModel.FK_Clerk_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="zooModel.FK_Cleck_Animal_Clerk" ManuallyRouted="false" />
-        <AssociationConnector Association="zooModel.FK_Diet_FeedType" ManuallyRouted="false" />
-        <AssociationConnector Association="zooModel.FK_Provider_Feed_FeedType" ManuallyRouted="false" />
-        <AssociationConnector Association="zooModel.FK_Provider_Feed_Provider" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="zooModel.ClimatZone" Width="1.5" PointX="5.375" PointY="0.875" />
+      <Diagram DiagramId="338f6f02143f4e2ba586113a4ef7a7b0" Name="Diagram1" ZoomLevel="33">
+        <EntityTypeShape EntityType="zooModel.Animal" Width="1.5" PointX="0.75" PointY="6.625" />
+        <EntityTypeShape EntityType="zooModel.Category" Width="1.5" PointX="1.5" PointY="13.25" />
+        <EntityTypeShape EntityType="zooModel.Clerk_Animal" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="zooModel.ClimatZone" Width="1.5" PointX="0.75" PointY="15.875" />
+        <EntityTypeShape EntityType="zooModel.Diet" Width="1.5" PointX="3" PointY="6.75" />
+        <EntityTypeShape EntityType="zooModel.FeedType" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="zooModel.Provider" Width="1.5" PointX="0.75" PointY="18.625" />
+        <EntityTypeShape EntityType="zooModel.Provider_Feed" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="zooModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="3.625" />
+        <EntityTypeShape EntityType="zooModel.User" Width="1.5" PointX="0.75" PointY="9.875" />
+        <EntityTypeShape EntityType="zooModel.Zone_Animal" Width="1.5" PointX="3" PointY="9.75" />
+        <AssociationConnector Association="zooModel.FK_Cleck_Animal_Animal" />
+        <AssociationConnector Association="zooModel.FK_Diet_Animal" />
+        <AssociationConnector Association="zooModel.FK_Zone_Animal_Animal" />
+        <AssociationConnector Association="zooModel.FK_Clerk_Category" />
+        <AssociationConnector Association="zooModel.FK_Cleck_Animal_Clerk" />
         <AssociationConnector Association="zooModel.FK_Zone_Animal_ClimatZone" />
+        <AssociationConnector Association="zooModel.FK_Diet_FeedType" />
+        <AssociationConnector Association="zooModel.FK_Provider_Feed_FeedType" />
+        <AssociationConnector Association="zooModel.FK_Provider_Feed_Provider" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
