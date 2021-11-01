@@ -25,37 +25,47 @@ namespace Zoo
     /// Логика взаимодействия для PageArctic.xaml
     /// </summary>
     
-    public partial class PageArctic : Page
+    public partial class PageSelectedZone : Page
     {
         public static ObservableCollection<Animal> animals { get; set; }
         public static ObservableCollection<ClimatZone> zones { get; set; }
-        public static IEnumerable<Animal_Zone> result { get; set; }
+        public static ObservableCollection<Zone_Animal> zone_Animals { get; set; }
+        public static IEnumerable<SelectedAnimal> selectedAnimals { get; set; }
 
-        public PageArctic()
+        public PageSelectedZone(ClimatZone zone)
         {
             //сделать 
             
             InitializeComponent();
+            
             animals = new ObservableCollection<Animal>(DBConnect.connection.Animal.ToList());
             zones = new ObservableCollection<ClimatZone>(DBConnect.connection.ClimatZone.ToList());
-            result = from animal in animals
-                     join zone in zones
-                     on animal.ClimatZone as ClimatZone equals zone as ClimatZone
-                     select new Animal_Zone
-                     {
-                         animal = animal.AnimalName,
-                         zone = zone.ZoneName
-                     };
+            zone_Animals = new ObservableCollection<Zone_Animal>(DBConnect.connection.Zone_Animal.ToList());
 
+            selectedAnimals = from a in animals
+                              join z in zone_Animals
+                              on a.AnimalID equals z.AnimalID
+                              where zone.ZoneID == z.ZoneID
+                              select new SelectedAnimal
+                              {
+                                  AnimalName = a.AnimalName,
+                                  ZoneID = z.ZoneID,
+                                  ZoneName = zone.ZoneName
+                              };
 
+            tb_ZoneName.Text = zone.ZoneName;
             this.DataContext = this;
             
         }
     }
 
-    public class Animal_Zone
-    {
-        public string animal { get; set; }
-        public string zone { get; set; }
+    public class SelectedAnimal
+    { 
+        public int ZoneID { get; set; }
+        public int AnimalID { get; set; }
+
+        public string AnimalName { get; set; }
+
+        public string ZoneName { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿<Page x:Class="Zoo.PageArctic"
+﻿<Page x:Class="Zoo.PageSelectedZone"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,20 +6,28 @@
       xmlns:local="clr-namespace:Zoo"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageArctic">
+      Title="PageSelectedZone">
 
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <ListView x:Name="lv_Animals" ItemsSource="{Binding result}" Grid.ColumnSpan="2" >
-
+        <TextBlock x:Name="tb_ZoneName" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36"  Grid.Row="0" Grid.ColumnSpan="2"/>
+        <ListView x:Name="lv_Animals" ItemsSource="{Binding selectedAnimals}" Grid.ColumnSpan="2" Grid.Row="1">
+            
             <ListView.ItemTemplate>
+                
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding animal}"/>
+                        <TextBlock Text="{Binding AnimalName}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

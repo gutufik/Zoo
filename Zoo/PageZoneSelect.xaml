@@ -12,14 +12,18 @@
         <ListView x:Name="lv_Zone" ItemsSource="{Binding climatZones}" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" SelectionChanged="lvZone_SelectionChanged">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="3"></UniformGrid>
+                    <UniformGrid Columns="3">
+                    </UniformGrid>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
-            
+
+
+
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding ZoneName}"/>
+                    <StackPanel HorizontalAlignment="Right">
+                        <TextBlock  FontSize="30" Text="{Binding ZoneName}"/>
+                        <Image Source="{Binding ZoneImage}"  Stretch="Fill" Width="150"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

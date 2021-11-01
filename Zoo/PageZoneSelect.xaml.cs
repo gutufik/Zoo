@@ -31,14 +31,7 @@ namespace Zoo
         private void lvZone_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //MessageBox.Show($"{((ClimatZone)lv_Zone.SelectedItem).ZoneName}");
-            switch (((ClimatZone)lv_Zone.SelectedItem).ZoneName)
-            {
-                case "Арктика":
-                    NavigationService.Navigate(new PageArctic());
-                    break;
-
-            }
-
+            NavigationService.Navigate(new PageSelectedZone((ClimatZone)lv_Zone.SelectedItem));
         }
     }
 }

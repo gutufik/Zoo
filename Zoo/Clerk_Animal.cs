@@ -12,13 +12,13 @@ namespace Zoo
     using System;
     using System.Collections.Generic;
     
-    public partial class Diet
+    public partial class Clerk_Animal
     {
-        public int DietID { get; set; }
+        public int CA_ID { get; set; }
         public int AnimalID { get; set; }
-        public int FeedTypeID { get; set; }
+        public int ClerkID { get; set; }
     
         public virtual Animal Animal { get; set; }
-        public virtual FeedType FeedType { get; set; }
+        public virtual Clerk Clerk { get; set; }
     }
 }

@@ -21,7 +21,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Frame x:Name="Frame_full" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2"></Frame>
+        <Frame x:Name="Frame_full"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2" ></Frame>
 
         
 
