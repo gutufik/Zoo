@@ -59,7 +59,7 @@ namespace Zoo
 
         private void btn_UserAdd_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new PageReg());
+            NavigationService.Navigate(new PageReg(this));
         }
     }
     public class UserCategory

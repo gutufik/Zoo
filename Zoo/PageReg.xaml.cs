@@ -24,19 +24,27 @@ namespace Zoo
     {
         public static ObservableCollection<Category> categories { get; set; }
         int i { get; set; }
+        PageUsers page { get; set; }
         public PageReg()
         {
             InitializeComponent();
             categories = new ObservableCollection<Category>(DBConnect.connection.Category.ToList());
             this.DataContext = this;
         }
+        public PageReg(PageUsers page)
+        {
+            InitializeComponent();
+            categories = new ObservableCollection<Category>(DBConnect.connection.Category.ToList());
+            this.DataContext = this;
+            this.page = page;
+        }
 
-        private void BackClick(object sender, RoutedEventArgs e)
+        private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnReg_Click(object sender, RoutedEventArgs e)
         {
             var u = new User();
             if (i != 0)
@@ -48,7 +56,14 @@ namespace Zoo
                 DBConnect.connection.User.Add(u);
                 DBConnect.connection.SaveChanges();
                 MessageBox.Show("All ok");
-                NavigationService.GoBack();
+                if (page != null)
+                {
+                    NavigationService.Navigate(new PageUsers());
+                }
+                else
+                {
+                    NavigationService.GoBack();
+                }
             }
             else 
             {

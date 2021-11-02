@@ -39,12 +39,12 @@
         <EntityType Name="Diet">
           <Key>
             <PropertyRef Name="DietID" />
-            <PropertyRef Name="AnimalID" />
-            <PropertyRef Name="FeedTypeID" />
           </Key>
-          <Property Name="DietID" Type="int" Nullable="false" />
+          <Property Name="DietID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="AnimalID" Type="int" Nullable="false" />
           <Property Name="FeedTypeID" Type="int" Nullable="false" />
+          <Property Name="Weight" Type="int" />
         </EntityType>
         <EntityType Name="FeedType">
           <Key>
@@ -67,16 +67,6 @@
           <Property Name="PF_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FeedTypeID" Type="int" Nullable="false" />
           <Property Name="ProviderID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -213,7 +203,6 @@
           <EntitySet Name="FeedType" EntityType="Self.FeedType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provider_Feed" EntityType="Self.Provider_Feed" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Zone_Animal" EntityType="Self.Zone_Animal" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cleck_Animal_Animal" Association="Self.FK_Cleck_Animal_Animal">
@@ -266,7 +255,6 @@
           <EntitySet Name="FeedType" EntityType="zooModel.FeedType" />
           <EntitySet Name="Provider" EntityType="zooModel.Provider" />
           <EntitySet Name="Provider_Feed" EntityType="zooModel.Provider_Feed" />
-          <EntitySet Name="sysdiagrams" EntityType="zooModel.sysdiagrams" />
           <EntitySet Name="User" EntityType="zooModel.User" />
           <EntitySet Name="Zone_Animal" EntityType="zooModel.Zone_Animal" />
           <AssociationSet Name="FK_Cleck_Animal_Animal" Association="zooModel.FK_Cleck_Animal_Animal">
@@ -347,12 +335,12 @@
         <EntityType Name="Diet">
           <Key>
             <PropertyRef Name="DietID" />
-            <PropertyRef Name="AnimalID" />
-            <PropertyRef Name="FeedTypeID" />
           </Key>
-          <Property Name="DietID" Type="Int32" Nullable="false" />
+          <Property Name="DietID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="AnimalID" Type="Int32" Nullable="false" />
           <Property Name="FeedTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Weight" Type="Int32" />
           <NavigationProperty Name="Animal" Relationship="zooModel.FK_Diet_Animal" FromRole="Diet" ToRole="Animal" />
           <NavigationProperty Name="FeedType" Relationship="zooModel.FK_Diet_FeedType" FromRole="Diet" ToRole="FeedType" />
         </EntityType>
@@ -382,16 +370,6 @@
           <Property Name="ProviderID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FeedType" Relationship="zooModel.FK_Provider_Feed_FeedType" FromRole="Provider_Feed" ToRole="FeedType" />
           <NavigationProperty Name="Provider" Relationship="zooModel.FK_Provider_Feed_Provider" FromRole="Provider_Feed" ToRole="Provider" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -567,8 +545,10 @@
           <EntitySetMapping Name="Diet">
             <EntityTypeMapping TypeName="zooModel.Diet">
               <MappingFragment StoreEntitySet="Diet">
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
                 <ScalarProperty Name="FeedTypeID" ColumnName="FeedTypeID" />
                 <ScalarProperty Name="AnimalID" ColumnName="AnimalID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="DietID" ColumnName="DietID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -595,17 +575,6 @@
                 <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
                 <ScalarProperty Name="FeedTypeID" ColumnName="FeedTypeID" />
                 <ScalarProperty Name="PF_ID" ColumnName="PF_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="zooModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

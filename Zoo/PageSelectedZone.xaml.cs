@@ -49,6 +49,7 @@ namespace Zoo
                               {
                                   AnimalName = a.AnimalName,
                                   ZoneID = z.ZoneID,
+                                  AnimalID = a.AnimalID,
                                   ZoneName = zone.ZoneName,
                                   AnimalImage = a.AnimalImage
                               };
@@ -57,15 +58,28 @@ namespace Zoo
             this.DataContext = this;
             
         }
+
+        private void lv_Animals_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var a = DBConnect.connection.Animal.Find((lv_Animals.SelectedItem as SelectedAnimal).AnimalID);
+            NavigationService.Navigate(new PageAnimalDiet(a));
+
+            //if (true)
+            //{
+
+            //}
+            //else 
+            //{
+
+            //}
+        }
     }
 
     public class SelectedAnimal
     { 
         public int ZoneID { get; set; }
         public int AnimalID { get; set; }
-
         public string AnimalName { get; set; }
-
         public string ZoneName { get; set; }
         public string AnimalImage { get; set; }
     }
