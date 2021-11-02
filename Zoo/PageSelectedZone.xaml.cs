@@ -56,17 +56,42 @@ namespace Zoo
 
             tb_ZoneName.Text = zone.ZoneName;
             this.DataContext = this;
-            
+          
         }
+        public PageSelectedZone(ClimatZone zone, User user)
+        {
 
+            InitializeComponent();
+
+            animals = new ObservableCollection<Animal>(DBConnect.connection.Animal.ToList());
+            zones = new ObservableCollection<ClimatZone>(DBConnect.connection.ClimatZone.ToList());
+            zone_Animals = new ObservableCollection<Zone_Animal>(DBConnect.connection.Zone_Animal.ToList());
+
+            selectedAnimals = from a in animals
+                              join z in zone_Animals
+                              on a.AnimalID equals z.AnimalID
+                              where zone.ZoneID == z.ZoneID
+                              select new SelectedAnimal
+                              {
+                                  AnimalName = a.AnimalName,
+                                  ZoneID = z.ZoneID,
+                                  AnimalID = a.AnimalID,
+                                  ZoneName = zone.ZoneName,
+                                  AnimalImage = a.AnimalImage
+                              };
+
+            tb_ZoneName.Text = zone.ZoneName;
+            this.DataContext = this;
+
+        }
         private void lv_Animals_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var a = DBConnect.connection.Animal.Find((lv_Animals.SelectedItem as SelectedAnimal).AnimalID);
 
             //if (true)
-            //    NavigationService.Navigate(new PageLookAnimal(a));
+                NavigationService.Navigate(new PageLookAnimal(a));
 
-            NavigationService.Navigate(new PageAnimalDiet(a));
+            //NavigationService.Navigate(new PageAnimalDiet(a));
         }
     }
 

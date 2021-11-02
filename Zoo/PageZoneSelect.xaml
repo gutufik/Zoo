@@ -39,8 +39,8 @@
 
         </ListView>
 
-        <Button Width="200" x:Name="btnUsers" Grid.Column="0" Grid.Row="0" Content="Пользователи" Click="btnUsers_Click" Visibility="Hidden"/>
-        <Button Width="200" x:Name="btnWorkZones" Grid.Column="1" Grid.Row="0" Content="Рабочие зоны" Click="btnWorkZones_Click" Visibility="Hidden"/>
+        <Button Width="200" x:Name="btnUsers" Grid.Column="0" Grid.Row="0" FontSize="20"  Content="Пользователи" Click="btnUsers_Click" Visibility="Hidden"/>
+        <Button Width="200" x:Name="btnWorkZones" Grid.Column="1" Grid.Row="0" FontSize="20" Content="Рабочие зоны" Click="btnWorkZones_Click" Visibility="Hidden"/>
 
     </Grid>
 </Page>

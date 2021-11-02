@@ -20,12 +20,10 @@ namespace Zoo
     /// </summary>
     public partial class PageLookAnimal : Page
     {
-        public Animal animal { get; set; }
         public string image { get; set; }
         public PageLookAnimal(Animal animal)
         {
             InitializeComponent();
-            this.animal = animal;
             this.DataContext = this;
             image = animal.AnimalImage;
         }
