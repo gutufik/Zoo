@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zoo"
         mc:Ignorable="d"
-        Title="HomeWindow" Height="600" Width="760">
+        Title="HomeWindow" Height="600" Width="760" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -16,14 +16,15 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="15*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Frame x:Name="Frame_full"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2" ></Frame>
-
-        
-
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <TextBlock x:Name="tbUser" FontSize="15" VerticalAlignment="Center"/>
+            <Button x:Name="btnChangeUser" Content="Сменить пользователя" Height="15" VerticalAlignment="Center" FontSize="9" Click="btnChangeUser_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

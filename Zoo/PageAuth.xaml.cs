@@ -29,10 +29,10 @@ namespace Zoo
         private void loginClick(object sender, RoutedEventArgs e)
         {
             users = new ObservableCollection<User>(DBConnect.connection.User.ToList());
-            var z = users.Where(a => a.Login == txtLogin.Text && a.Password == txtPassword.Password).FirstOrDefault();
-            if (z != null)
+            var user = users.Where(a => a.Login == txtLogin.Text && a.Password == txtPassword.Password).FirstOrDefault();
+            if (user != null)
             {
-                HomeWindow homeWindow = new HomeWindow();
+                HomeWindow homeWindow = new HomeWindow(user);
                 homeWindow.Show();
                 Application.Current.MainWindow.Close();
             }

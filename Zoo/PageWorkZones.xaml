@@ -13,12 +13,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="8*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <DataGrid FontSize="20" x:Name="dg_Users" Grid.ColumnSpan="2" AutoGenerateColumns="True" ItemsSource="{Binding users_}"  IsReadOnly="True"/>
-        <Button Grid.Column="0" Grid.Row="1" x:Name="btn_ZoneDel" IsEnabled="False" Content="Удалить"/>
-        <Button Grid.Column="1" Grid.Row="1" x:Name="btn_ZoneAdd"  Content="Добавить" />
+
+        <DataGrid FontSize="20" x:Name="dg_WorkZones" Grid.ColumnSpan="2" AutoGenerateColumns="True" ItemsSource="{Binding workZones}"  IsReadOnly="True"/>
     </Grid>
 </Page>

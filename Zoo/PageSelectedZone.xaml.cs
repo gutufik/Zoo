@@ -62,16 +62,11 @@ namespace Zoo
         private void lv_Animals_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var a = DBConnect.connection.Animal.Find((lv_Animals.SelectedItem as SelectedAnimal).AnimalID);
-            NavigationService.Navigate(new PageAnimalDiet(a));
 
             //if (true)
-            //{
+            //    NavigationService.Navigate(new PageLookAnimal(a));
 
-            //}
-            //else 
-            //{
-
-            //}
+            NavigationService.Navigate(new PageAnimalDiet(a));
         }
     }
 

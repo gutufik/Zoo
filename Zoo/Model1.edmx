@@ -20,13 +20,13 @@
           <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryName" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Clerk_Animal">
+        <EntityType Name="Clerk_Zone">
           <Key>
-            <PropertyRef Name="CA_ID" />
+            <PropertyRef Name="CZ_ID" />
           </Key>
-          <Property Name="CA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AnimalID" Type="int" Nullable="false" />
+          <Property Name="CZ_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClerkID" Type="int" Nullable="false" />
+          <Property Name="ZoneID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ClimatZone">
           <Key>
@@ -53,20 +53,15 @@
           <Property Name="FeedTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FeedTypeName" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Provider">
+        <EntityType Name="sysdiagrams">
           <Key>
-            <PropertyRef Name="ProviderID" />
+            <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="ProviderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProviderName" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Provider_Feed">
-          <Key>
-            <PropertyRef Name="PF_ID" />
-          </Key>
-          <Property Name="PF_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FeedTypeID" Type="int" Nullable="false" />
-          <Property Name="ProviderID" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -86,26 +81,14 @@
           <Property Name="ZoneID" Type="int" Nullable="false" />
           <Property Name="AnimalID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Cleck_Animal_Animal">
-          <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
-          <End Role="Clerk_Animal" Type="Self.Clerk_Animal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Animal">
-              <PropertyRef Name="AnimalID" />
-            </Principal>
-            <Dependent Role="Clerk_Animal">
-              <PropertyRef Name="AnimalID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Cleck_Animal_Clerk">
           <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Clerk_Animal" Type="Self.Clerk_Animal" Multiplicity="*" />
+          <End Role="Clerk_Zone" Type="Self.Clerk_Zone" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="Clerk_Animal">
+            <Dependent Role="Clerk_Zone">
               <PropertyRef Name="ClerkID" />
             </Dependent>
           </ReferentialConstraint>
@@ -119,6 +102,18 @@
             </Principal>
             <Dependent Role="User">
               <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clerk_Zone_ClimatZone">
+          <End Role="ClimatZone" Type="Self.ClimatZone" Multiplicity="1" />
+          <End Role="Clerk_Zone" Type="Self.Clerk_Zone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClimatZone">
+              <PropertyRef Name="ZoneID" />
+            </Principal>
+            <Dependent Role="Clerk_Zone">
+              <PropertyRef Name="ZoneID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -143,30 +138,6 @@
             </Principal>
             <Dependent Role="Diet">
               <PropertyRef Name="FeedTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Provider_Feed_FeedType">
-          <End Role="FeedType" Type="Self.FeedType" Multiplicity="1" />
-          <End Role="Provider_Feed" Type="Self.Provider_Feed" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FeedType">
-              <PropertyRef Name="FeedTypeID" />
-            </Principal>
-            <Dependent Role="Provider_Feed">
-              <PropertyRef Name="FeedTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Provider_Feed_Provider">
-          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
-          <End Role="Provider_Feed" Type="Self.Provider_Feed" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provider">
-              <PropertyRef Name="ProviderID" />
-            </Principal>
-            <Dependent Role="Provider_Feed">
-              <PropertyRef Name="ProviderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -197,25 +168,24 @@
         <EntityContainer Name="zooModelStoreContainer">
           <EntitySet Name="Animal" EntityType="Self.Animal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Clerk_Animal" EntityType="Self.Clerk_Animal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clerk_Zone" EntityType="Self.Clerk_Zone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClimatZone" EntityType="Self.ClimatZone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Diet" EntityType="Self.Diet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FeedType" EntityType="Self.FeedType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Provider_Feed" EntityType="Self.Provider_Feed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Zone_Animal" EntityType="Self.Zone_Animal" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Cleck_Animal_Animal" Association="Self.FK_Cleck_Animal_Animal">
-            <End Role="Animal" EntitySet="Animal" />
-            <End Role="Clerk_Animal" EntitySet="Clerk_Animal" />
-          </AssociationSet>
           <AssociationSet Name="FK_Cleck_Animal_Clerk" Association="Self.FK_Cleck_Animal_Clerk">
             <End Role="User" EntitySet="User" />
-            <End Role="Clerk_Animal" EntitySet="Clerk_Animal" />
+            <End Role="Clerk_Zone" EntitySet="Clerk_Zone" />
           </AssociationSet>
           <AssociationSet Name="FK_Clerk_Category" Association="Self.FK_Clerk_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clerk_Zone_ClimatZone" Association="Self.FK_Clerk_Zone_ClimatZone">
+            <End Role="ClimatZone" EntitySet="ClimatZone" />
+            <End Role="Clerk_Zone" EntitySet="Clerk_Zone" />
           </AssociationSet>
           <AssociationSet Name="FK_Diet_Animal" Association="Self.FK_Diet_Animal">
             <End Role="Animal" EntitySet="Animal" />
@@ -224,14 +194,6 @@
           <AssociationSet Name="FK_Diet_FeedType" Association="Self.FK_Diet_FeedType">
             <End Role="FeedType" EntitySet="FeedType" />
             <End Role="Diet" EntitySet="Diet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Provider_Feed_FeedType" Association="Self.FK_Provider_Feed_FeedType">
-            <End Role="FeedType" EntitySet="FeedType" />
-            <End Role="Provider_Feed" EntitySet="Provider_Feed" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Provider_Feed_Provider" Association="Self.FK_Provider_Feed_Provider">
-            <End Role="Provider" EntitySet="Provider" />
-            <End Role="Provider_Feed" EntitySet="Provider_Feed" />
           </AssociationSet>
           <AssociationSet Name="FK_Zone_Animal_Animal" Association="Self.FK_Zone_Animal_Animal">
             <End Role="Animal" EntitySet="Animal" />
@@ -249,18 +211,13 @@
         <EntityContainer Name="Zoo_Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Animal" EntityType="zooModel.Animal" />
           <EntitySet Name="Category" EntityType="zooModel.Category" />
-          <EntitySet Name="Clerk_Animal" EntityType="zooModel.Clerk_Animal" />
+          <EntitySet Name="Clerk_Zone" EntityType="zooModel.Clerk_Zone" />
           <EntitySet Name="ClimatZone" EntityType="zooModel.ClimatZone" />
           <EntitySet Name="Diet" EntityType="zooModel.Diet" />
           <EntitySet Name="FeedType" EntityType="zooModel.FeedType" />
-          <EntitySet Name="Provider" EntityType="zooModel.Provider" />
-          <EntitySet Name="Provider_Feed" EntityType="zooModel.Provider_Feed" />
+          <EntitySet Name="sysdiagrams" EntityType="zooModel.sysdiagrams" />
           <EntitySet Name="User" EntityType="zooModel.User" />
           <EntitySet Name="Zone_Animal" EntityType="zooModel.Zone_Animal" />
-          <AssociationSet Name="FK_Cleck_Animal_Animal" Association="zooModel.FK_Cleck_Animal_Animal">
-            <End Role="Animal" EntitySet="Animal" />
-            <End Role="Clerk_Animal" EntitySet="Clerk_Animal" />
-          </AssociationSet>
           <AssociationSet Name="FK_Diet_Animal" Association="zooModel.FK_Diet_Animal">
             <End Role="Animal" EntitySet="Animal" />
             <End Role="Diet" EntitySet="Diet" />
@@ -275,7 +232,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_Cleck_Animal_Clerk" Association="zooModel.FK_Cleck_Animal_Clerk">
             <End Role="User" EntitySet="User" />
-            <End Role="Clerk_Animal" EntitySet="Clerk_Animal" />
+            <End Role="Clerk_Zone" EntitySet="Clerk_Zone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clerk_Zone_ClimatZone" Association="zooModel.FK_Clerk_Zone_ClimatZone">
+            <End Role="ClimatZone" EntitySet="ClimatZone" />
+            <End Role="Clerk_Zone" EntitySet="Clerk_Zone" />
           </AssociationSet>
           <AssociationSet Name="FK_Zone_Animal_ClimatZone" Association="zooModel.FK_Zone_Animal_ClimatZone">
             <End Role="ClimatZone" EntitySet="ClimatZone" />
@@ -285,14 +246,6 @@
             <End Role="FeedType" EntitySet="FeedType" />
             <End Role="Diet" EntitySet="Diet" />
           </AssociationSet>
-          <AssociationSet Name="FK_Provider_Feed_FeedType" Association="zooModel.FK_Provider_Feed_FeedType">
-            <End Role="FeedType" EntitySet="FeedType" />
-            <End Role="Provider_Feed" EntitySet="Provider_Feed" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Provider_Feed_Provider" Association="zooModel.FK_Provider_Feed_Provider">
-            <End Role="Provider" EntitySet="Provider" />
-            <End Role="Provider_Feed" EntitySet="Provider_Feed" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Animal">
           <Key>
@@ -301,7 +254,6 @@
           <Property Name="AnimalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AnimalName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AnimalImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Clerk_Animal" Relationship="zooModel.FK_Cleck_Animal_Animal" FromRole="Animal" ToRole="Clerk_Animal" />
           <NavigationProperty Name="Diet" Relationship="zooModel.FK_Diet_Animal" FromRole="Animal" ToRole="Diet" />
           <NavigationProperty Name="Zone_Animal" Relationship="zooModel.FK_Zone_Animal_Animal" FromRole="Animal" ToRole="Zone_Animal" />
         </EntityType>
@@ -313,15 +265,15 @@
           <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="zooModel.FK_Clerk_Category" FromRole="Category" ToRole="User" />
         </EntityType>
-        <EntityType Name="Clerk_Animal">
+        <EntityType Name="Clerk_Zone">
           <Key>
-            <PropertyRef Name="CA_ID" />
+            <PropertyRef Name="CZ_ID" />
           </Key>
-          <Property Name="CA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AnimalID" Type="Int32" Nullable="false" />
+          <Property Name="CZ_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClerkID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Animal" Relationship="zooModel.FK_Cleck_Animal_Animal" FromRole="Clerk_Animal" ToRole="Animal" />
-          <NavigationProperty Name="User" Relationship="zooModel.FK_Cleck_Animal_Clerk" FromRole="Clerk_Animal" ToRole="User" />
+          <Property Name="ZoneID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="zooModel.FK_Cleck_Animal_Clerk" FromRole="Clerk_Zone" ToRole="User" />
+          <NavigationProperty Name="ClimatZone" Relationship="zooModel.FK_Clerk_Zone_ClimatZone" FromRole="Clerk_Zone" ToRole="ClimatZone" />
         </EntityType>
         <EntityType Name="ClimatZone">
           <Key>
@@ -330,6 +282,7 @@
           <Property Name="ZoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ZoneName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ZoneImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Clerk_Zone" Relationship="zooModel.FK_Clerk_Zone_ClimatZone" FromRole="ClimatZone" ToRole="Clerk_Zone" />
           <NavigationProperty Name="Zone_Animal" Relationship="zooModel.FK_Zone_Animal_ClimatZone" FromRole="ClimatZone" ToRole="Zone_Animal" />
         </EntityType>
         <EntityType Name="Diet">
@@ -351,25 +304,16 @@
           <Property Name="FeedTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FeedTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Diet" Relationship="zooModel.FK_Diet_FeedType" FromRole="FeedType" ToRole="Diet" />
-          <NavigationProperty Name="Provider_Feed" Relationship="zooModel.FK_Provider_Feed_FeedType" FromRole="FeedType" ToRole="Provider_Feed" />
         </EntityType>
-        <EntityType Name="Provider">
+        <EntityType Name="sysdiagrams">
           <Key>
-            <PropertyRef Name="ProviderID" />
+            <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="ProviderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProviderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Provider_Feed" Relationship="zooModel.FK_Provider_Feed_Provider" FromRole="Provider" ToRole="Provider_Feed" />
-        </EntityType>
-        <EntityType Name="Provider_Feed">
-          <Key>
-            <PropertyRef Name="PF_ID" />
-          </Key>
-          <Property Name="PF_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FeedTypeID" Type="Int32" Nullable="false" />
-          <Property Name="ProviderID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FeedType" Relationship="zooModel.FK_Provider_Feed_FeedType" FromRole="Provider_Feed" ToRole="FeedType" />
-          <NavigationProperty Name="Provider" Relationship="zooModel.FK_Provider_Feed_Provider" FromRole="Provider_Feed" ToRole="Provider" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -381,7 +325,7 @@
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Category" Relationship="zooModel.FK_Clerk_Category" FromRole="User" ToRole="Category" />
-          <NavigationProperty Name="Clerk_Animal" Relationship="zooModel.FK_Cleck_Animal_Clerk" FromRole="User" ToRole="Clerk_Animal" />
+          <NavigationProperty Name="Clerk_Zone" Relationship="zooModel.FK_Cleck_Animal_Clerk" FromRole="User" ToRole="Clerk_Zone" />
         </EntityType>
         <EntityType Name="Zone_Animal">
           <Key>
@@ -393,18 +337,6 @@
           <NavigationProperty Name="Animal" Relationship="zooModel.FK_Zone_Animal_Animal" FromRole="Zone_Animal" ToRole="Animal" />
           <NavigationProperty Name="ClimatZone" Relationship="zooModel.FK_Zone_Animal_ClimatZone" FromRole="Zone_Animal" ToRole="ClimatZone" />
         </EntityType>
-        <Association Name="FK_Cleck_Animal_Animal">
-          <End Type="zooModel.Animal" Role="Animal" Multiplicity="1" />
-          <End Type="zooModel.Clerk_Animal" Role="Clerk_Animal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Animal">
-              <PropertyRef Name="AnimalID" />
-            </Principal>
-            <Dependent Role="Clerk_Animal">
-              <PropertyRef Name="AnimalID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Diet_Animal">
           <End Type="zooModel.Animal" Role="Animal" Multiplicity="1" />
           <End Type="zooModel.Diet" Role="Diet" Multiplicity="*" />
@@ -443,13 +375,25 @@
         </Association>
         <Association Name="FK_Cleck_Animal_Clerk">
           <End Type="zooModel.User" Role="User" Multiplicity="1" />
-          <End Type="zooModel.Clerk_Animal" Role="Clerk_Animal" Multiplicity="*" />
+          <End Type="zooModel.Clerk_Zone" Role="Clerk_Zone" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="Clerk_Animal">
+            <Dependent Role="Clerk_Zone">
               <PropertyRef Name="ClerkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clerk_Zone_ClimatZone">
+          <End Type="zooModel.ClimatZone" Role="ClimatZone" Multiplicity="1" />
+          <End Type="zooModel.Clerk_Zone" Role="Clerk_Zone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClimatZone">
+              <PropertyRef Name="ZoneID" />
+            </Principal>
+            <Dependent Role="Clerk_Zone">
+              <PropertyRef Name="ZoneID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -477,30 +421,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Provider_Feed_FeedType">
-          <End Type="zooModel.FeedType" Role="FeedType" Multiplicity="1" />
-          <End Type="zooModel.Provider_Feed" Role="Provider_Feed" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FeedType">
-              <PropertyRef Name="FeedTypeID" />
-            </Principal>
-            <Dependent Role="Provider_Feed">
-              <PropertyRef Name="FeedTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Provider_Feed_Provider">
-          <End Type="zooModel.Provider" Role="Provider" Multiplicity="1" />
-          <End Type="zooModel.Provider_Feed" Role="Provider_Feed" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provider">
-              <PropertyRef Name="ProviderID" />
-            </Principal>
-            <Dependent Role="Provider_Feed">
-              <PropertyRef Name="ProviderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -524,12 +444,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Clerk_Animal">
-            <EntityTypeMapping TypeName="zooModel.Clerk_Animal">
-              <MappingFragment StoreEntitySet="Clerk_Animal">
+          <EntitySetMapping Name="Clerk_Zone">
+            <EntityTypeMapping TypeName="zooModel.Clerk_Zone">
+              <MappingFragment StoreEntitySet="Clerk_Zone">
+                <ScalarProperty Name="ZoneID" ColumnName="ZoneID" />
                 <ScalarProperty Name="ClerkID" ColumnName="ClerkID" />
-                <ScalarProperty Name="AnimalID" ColumnName="AnimalID" />
-                <ScalarProperty Name="CA_ID" ColumnName="CA_ID" />
+                <ScalarProperty Name="CZ_ID" ColumnName="CZ_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -561,20 +481,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Provider">
-            <EntityTypeMapping TypeName="zooModel.Provider">
-              <MappingFragment StoreEntitySet="Provider">
-                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
-                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Provider_Feed">
-            <EntityTypeMapping TypeName="zooModel.Provider_Feed">
-              <MappingFragment StoreEntitySet="Provider_Feed">
-                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
-                <ScalarProperty Name="FeedTypeID" ColumnName="FeedTypeID" />
-                <ScalarProperty Name="PF_ID" ColumnName="PF_ID" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="zooModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

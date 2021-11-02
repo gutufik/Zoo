@@ -10,18 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Zoo
 {
     /// <summary>
-    /// Логика взаимодействия для AddUserWindow.xaml
+    /// Логика взаимодействия для PageLookAnimal.xaml
     /// </summary>
-    public partial class AddUserWindow : Window
+    public partial class PageLookAnimal : Page
     {
-        public AddUserWindow()
+        public Animal animal { get; set; }
+        public string image { get; set; }
+        public PageLookAnimal(Animal animal)
         {
             InitializeComponent();
+            this.animal = animal;
+            this.DataContext = this;
+            image = animal.AnimalImage;
         }
     }
 }

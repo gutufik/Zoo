@@ -12,18 +12,13 @@ namespace Zoo
     using System;
     using System.Collections.Generic;
     
-    public partial class FeedType
+    public partial class Clerk_Zone
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FeedType()
-        {
-            this.Diet = new HashSet<Diet>();
-        }
+        public int CZ_ID { get; set; }
+        public int ClerkID { get; set; }
+        public int ZoneID { get; set; }
     
-        public int FeedTypeID { get; set; }
-        public string FeedTypeName { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Diet> Diet { get; set; }
+        public virtual User User { get; set; }
+        public virtual ClimatZone ClimatZone { get; set; }
     }
 }

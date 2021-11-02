@@ -24,8 +24,10 @@ namespace Zoo
         public ObservableCollection<Diet> diets { get; set; }
         public ObservableCollection<FeedType> feedTypes { get; set; }
         public IEnumerable<AnimalDiet> animalDiets { get; set; }
+        private Animal animal;
         public PageAnimalDiet(Animal animal)
         {
+            this.animal = animal;
             InitializeComponent();
             diets = new ObservableCollection<Diet>(DBConnect.connection.Diet.ToList());
             feedTypes = new ObservableCollection<FeedType>(DBConnect.connection.FeedType.ToList());
@@ -41,10 +43,14 @@ namespace Zoo
                               date = d.Date,
                               FeedType = ft.FeedTypeName,
                               Weight = (int)d.Weight
-
                           };
 
 
+        }
+
+        private void btnAddFood_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new PageAddFood(animal));
         }
     }
 

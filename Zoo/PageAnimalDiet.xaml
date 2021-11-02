@@ -20,6 +20,6 @@
         </Grid.ColumnDefinitions>
 
         <DataGrid FontSize="20"  Grid.Row="0"  Grid.ColumnSpan="2" AutoGenerateColumns="True" ItemsSource="{Binding animalDiets}" IsReadOnly="True"/>
-        <Button Grid.Row="1" FontSize="22" Grid.ColumnSpan="2" Content="Добавить"/>
+        <Button Grid.Row="1" x:Name="btnAddFood" FontSize="22" Grid.ColumnSpan="2" Content="Добавить" Click="btnAddFood_Click"/>
     </Grid>
 </Page>
