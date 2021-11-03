@@ -60,7 +60,7 @@ namespace Zoo
             try
             {
                 var wz = dg_WorkZones.SelectedItem as WorkZone;
-                DBConnect.connection.User.Remove(DBConnect.connection.User.Find(wz.ZoneID, wz.ClerkID));
+                DBConnect.connection.Clerk_Zone.Remove(DBConnect.connection.Clerk_Zone.Find(wz.ZoneID, wz.ClerkID));
                 DBConnect.connection.SaveChanges();
                 NavigationService.Navigate(new PageWorkZones());
             }
