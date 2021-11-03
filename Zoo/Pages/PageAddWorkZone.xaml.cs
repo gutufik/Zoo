@@ -23,9 +23,11 @@ namespace Zoo.Pages
     {
         public static ObservableCollection<User> users { get; set; }
         public static ObservableCollection<ClimatZone> climatZones{ get; set; }
-        public PageAddWorkZone()
+        public User user;
+        public PageAddWorkZone(User user)
         {
             InitializeComponent();
+            this.user = user;
             users = new ObservableCollection<User>(DBConnect.connection.User.ToList());
             climatZones = new ObservableCollection<ClimatZone>(DBConnect.connection.ClimatZone.ToList());
             this.DataContext = this;
@@ -64,7 +66,7 @@ namespace Zoo.Pages
             }
             finally
             {
-                NavigationService.Navigate(new PageWorkZones());
+                NavigationService.Navigate(new PageWorkZones(user));
             }
 
         }

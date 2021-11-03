@@ -54,7 +54,7 @@ namespace Zoo
 
         private void btnWorkZones_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new PageWorkZones());
+            NavigationService.Navigate(new PageWorkZones(user));
         }
     }
 }

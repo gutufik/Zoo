@@ -21,28 +21,36 @@
             
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ComboBox x:Name="cbZone" ItemsSource="{Binding climatZones}" Margin="20" Width="150">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding ZoneName}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <ComboBox x:Name="cbUser" ItemsSource="{Binding users}" Margin="20" Width="150">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding UserName}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+            <StackPanel>
+                <TextBlock Text="Зона" FontSize="20" HorizontalAlignment="Center"/>
+                <ComboBox x:Name="cbZone" ItemsSource="{Binding climatZones}" Margin="20" Width="150">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding ZoneName}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            
+            <StackPanel>
+                <TextBlock Text="Работник" FontSize="20" HorizontalAlignment="Center"/>
+                <ComboBox x:Name="cbUser" ItemsSource="{Binding users}" Margin="20" Width="150">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding UserName}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <Button x:Name="btnCancel" Content="Отмена" Click="btnCancel_Click"/>
-            <Button x:Name="btnOK" Content="ОК" Click="btnOK_Click"/>
+            <Button x:Name="btnCancel" Content="Отмена" Click="btnCancel_Click" FontSize="15" Margin="0,0,20,0"/>
+            <Button x:Name="btnOK" Content="ОК" Click="btnOK_Click" FontSize="15" Margin="20,0,0,0"/>
         </StackPanel>
     </Grid>
 </Page>

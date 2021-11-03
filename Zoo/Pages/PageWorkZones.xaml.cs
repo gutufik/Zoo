@@ -26,14 +26,22 @@ namespace Zoo
         public ObservableCollection<ClimatZone> climatZones { get; set; }
 
         public IEnumerable<WorkZone> workZones { get; set; }
+        public User user1;
 
-        public PageWorkZones()
+        public PageWorkZones(User user)
         {
+            user1 = user;
             InitializeComponent();
             users = new ObservableCollection<User>(DBConnect.connection.User.ToList());
             climatZones = new ObservableCollection<ClimatZone>(DBConnect.connection.ClimatZone.ToList());
             clerk_Zones = new ObservableCollection<Clerk_Zone>(DBConnect.connection.Clerk_Zone.ToList());
             this.DataContext = this;
+
+            if (user.CategoryID == 1)
+            {
+                btnAdd.Visibility = Visibility.Visible;
+                btnDelete.Visibility = Visibility.Visible;
+            }
 
             workZones = from cz in clerk_Zones
                         join clz in climatZones
@@ -52,7 +60,7 @@ namespace Zoo
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Pages.PageAddWorkZone());
+            NavigationService.Navigate(new Pages.PageAddWorkZone(user1));
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -60,11 +68,25 @@ namespace Zoo
             try
             {
                 var wz = dg_WorkZones.SelectedItem as WorkZone;
-                DBConnect.connection.Clerk_Zone.Remove(DBConnect.connection.Clerk_Zone.Find(wz.ZoneID, wz.ClerkID));
-                DBConnect.connection.SaveChanges();
-                NavigationService.Navigate(new PageWorkZones());
+                var clerk_ = from cz_ in clerk_Zones
+                              where cz_.ClerkID == wz.ClerkID
+                              where cz_.ZoneID == wz.ZoneID
+                              select new Clerk_Zone
+                              {
+                                  CZ_ID = cz_.CZ_ID,
+                                  ClerkID = wz.ClerkID,
+                                  ZoneID = wz.ZoneID
+                              };
+
+                foreach (var c in clerk_)
+                {
+                    DBConnect.connection.Clerk_Zone.Remove(DBConnect.connection.Clerk_Zone.Find(c.CZ_ID));
+                    DBConnect.connection.SaveChanges();
+                    NavigationService.Navigate(new PageWorkZones(user1));
+                }
+
             }
-            catch
+            catch (Exception ex)
             {
                 MessageBox.Show("Error");
             }
