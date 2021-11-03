@@ -42,15 +42,40 @@ namespace Zoo
                         on cz.ClerkID equals u.UserID
                         select new WorkZone
                         {
+                            ClerkID = u.UserID,
+                            ZoneID = clz.ZoneID,
                             ClerkName = u.UserName,
                             ZoneName = clz.ZoneName
                         };
 
         }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Pages.PageAddWorkZone());
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var wz = dg_WorkZones.SelectedItem as WorkZone;
+                DBConnect.connection.User.Remove(DBConnect.connection.User.Find(wz.ZoneID, wz.ClerkID));
+                DBConnect.connection.SaveChanges();
+                NavigationService.Navigate(new PageWorkZones());
+            }
+            catch
+            {
+                MessageBox.Show("Error");
+            }
+
+        }
     }
     public class WorkZone
     { 
+        public int ClerkID { get; set; }
         public string ClerkName { get; set; }
+        public int ZoneID { get; set; }
         public string ZoneName { get; set; }
     }
 }

@@ -13,7 +13,15 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
         <DataGrid FontSize="20" x:Name="dg_WorkZones" Grid.ColumnSpan="2" AutoGenerateColumns="True" ItemsSource="{Binding workZones}"  IsReadOnly="True"/>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="btnDelete" Content="Удалить" Click="btnDelete_Click"/>
+            <Button x:Name="btnAdd" Content="Добавить" Click="btnAdd_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

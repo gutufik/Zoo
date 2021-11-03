@@ -83,6 +83,9 @@
     <Compile Include="FeedType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PageAddWorkZone.xaml.cs">
+      <DependentUpon>PageAddWorkZone.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,10 @@
     <Compile Include="Zone_Animal.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Page Include="Pages\PageAddWorkZone.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\HomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
