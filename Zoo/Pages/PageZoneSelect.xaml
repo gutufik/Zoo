@@ -1,0 +1,46 @@
+﻿<Page x:Class="Zoo.PageZoneSelect"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Zoo"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="700"
+      Title="PageZoneSelect">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <ListView x:Name="lv_Zone" ItemsSource="{Binding climatZones}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" SelectionChanged="lvZone_SelectionChanged">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3">
+                    </UniformGrid>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock HorizontalAlignment="Center" FontSize="30" Text="{Binding ZoneName}"/>
+                        <Image HorizontalAlignment="Right"  Source="{Binding ZoneImage}" Width="200"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+        <Button Width="200" x:Name="btnUsers" Grid.Column="0" Grid.Row="0" FontSize="20"  Content="Пользователи" Click="btnUsers_Click" Visibility="Hidden"/>
+        <Button Width="200" x:Name="btnWorkZones" Grid.Column="1" Grid.Row="0" FontSize="20" Content="Рабочие зоны" Click="btnWorkZones_Click" Visibility="Hidden"/>
+
+    </Grid>
+</Page>
