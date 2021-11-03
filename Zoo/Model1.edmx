@@ -82,7 +82,9 @@
           <Property Name="AnimalID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Cleck_Animal_Clerk">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Clerk_Zone" Type="Self.Clerk_Zone" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -374,7 +376,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cleck_Animal_Clerk">
-          <End Type="zooModel.User" Role="User" Multiplicity="1" />
+          <End Type="zooModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="zooModel.Clerk_Zone" Role="Clerk_Zone" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
